@@ -26,7 +26,7 @@ function shownotes(){
     let html="";
     notesobj.forEach(function(element,index){
         html+=`
-        <div class="card my-2 mx-2" style="width: 18rem;">
+        <div class="notecard card my-2 mx-2" style="width: 18rem;">
         <div class="card-body">
             <h5 class="card-title">Note ${index+1}</h5>
             <p class="card-text">${element}</p>
@@ -66,4 +66,26 @@ function deletenote(index) {
     
 }
 
-searchtxt=document.getElementById('searchtxt');
+let search=document.getElementById('searchtxt');
+search.addEventListener('input',function() {
+    let inputVal = search.value.toLowerCase();
+    console.log('input log!',inputVal);
+    let notecards = document.getElementsByClassName('notecard');
+    Array.from(notecards).forEach(function(element){
+        let cardtxt=element.getElementsByTagName("p")[0].innerText;
+        if(cardtxt.includes(inputVal)){
+            element.style.display="block";
+        }
+        else{
+            element.style.display="none";
+        }
+    })
+
+})
+
+/*
+1. add title
+2. mark to imp note
+3. separate note by user account
+4. host to the server
+*/ 
